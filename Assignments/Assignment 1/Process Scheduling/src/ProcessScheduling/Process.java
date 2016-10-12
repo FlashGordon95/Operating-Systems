@@ -7,7 +7,7 @@ package ProcessScheduling;
  * @author college
  *
  */
-public class Process {
+public class Process implements Comparable<Process> {
 	//needed for process creations
 	private String processName;
 	private int pid;
@@ -24,6 +24,24 @@ public class Process {
         this.processName = processName;
         
        
+    }
+	public int getProcessID(){
+		
+		return this.pid;
+	}
+	@Override
+    public int compareTo(Process compareProcess) {
+        int compareID=((Process)compareProcess).getProcessID();
+        /* For Ascending order*/
+        return this.pid-compareID;
+
+        /* For Descending order do like this */
+        //return compareage-this.studentage;
+    }
+
+    @Override
+    public String toString() {
+        return "[ Process name=" + this.processName + ", PID=" + this.pid + "]";
     }
 
 }

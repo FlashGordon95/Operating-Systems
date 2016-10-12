@@ -34,10 +34,11 @@ public class Runner {
 			//enter name for process
 			//enter burst time for process
 			
-			System.out.print("Enter something : ");
+			System.out.println("Enter something : ");
 			String s = in.next();
+			in.nextLine();
 			
-			System.out.println("Enter burst time : ");
+			System.out.print("Enter burst time : ");
 			int b = in.nextInt();
 			
 			
@@ -52,7 +53,7 @@ public class Runner {
 		}
 		
 		
-		
+		/*
 		int prefferedAlgo = Integer.parseInt(JOptionPane.showInputDialog("Which also do you want to use? \n 1. FCFS \n 2. SJF \n 3. Round Robin (Quantum needed)"));
 		 
 		switch(prefferedAlgo){
@@ -75,21 +76,26 @@ public class Runner {
 			JOptionPane.showMessageDialog(null,"You need to pick a valid algo. Wise up");
 		 	
 		 }//end switch
-		 
+		 */
 		 //Print the results to the user
 		 //Calc the avg waiting time
+		
+		for (Process process : processQueue){
+			
+			System.out.println(process.getProcessID());// get the time 
+		}
 	
 		 FCFS(processQueue);
 		
 	}//end main
 	
-	 public void FCFS(ArrayList<Process> processes){
+	 public static void FCFS(ArrayList<Process> processQueue){
 		
-		Collections.sort(processes);
+		Collections.sort(processQueue);
 		
-		for (Process str : processes){
+		for (Process process : processQueue){
 			
-			System.out.println();// get the time 
+			System.out.println(process.getProcessID());// get the time 
 		}
 		
 	}

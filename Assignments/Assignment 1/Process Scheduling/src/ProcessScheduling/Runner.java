@@ -1,20 +1,61 @@
 package ProcessScheduling;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
+
 public class Runner {
-	//Prompt for input 
-	 static int numOfProcesses;
+	
+	 
+	 
 	 
 	
-	
 	public static void main(String args[]){
-		numOfProcesses = Integer.parseInt(JOptionPane.showInputDialog("Enter how many processes you want to schedule"));
+		//Prompt for input 
+		 int numOfProcesses;
+		 ArrayList<Process> processQueue = new ArrayList<Process>();
+		
+		Scanner in = new Scanner(System.in);
+		
+		
+		//numOfProcesses = Integer.parseInt(JOptionPane.showInputDialog("Enter how many processes you want to schedule"));
+		System.out.println("Enter how many processes you want to schedule");
+		numOfProcesses = in.nextInt();
+		
+
 		//Take the num and prompt for which algo
+		int[] processArray = new int[numOfProcesses];
+		
+		for (int i = 0; i < processArray.length; i++){
+			//enter name for process
+			//enter burst time for process
+			
+			System.out.print("Enter something : ");
+			String s = in.next();
+			
+			System.out.println("Enter burst time : ");
+			int b = in.nextInt();
+			
+			
+			Process process = new Process(s, b);
+			
+			processQueue.add(process);
+			
+			
+			//create a new process object
+			//push object in ArrayList
+			
+		}
+		
+		
 		
 		int prefferedAlgo = Integer.parseInt(JOptionPane.showInputDialog("Which also do you want to use? \n 1. FCFS \n 2. SJF \n 3. Round Robin (Quantum needed)"));
 		 
-		 switch(prefferedAlgo){
+		switch(prefferedAlgo){
 		 case 1: 
 			 //run the FCFS algo
 			 
@@ -33,12 +74,23 @@ public class Runner {
 		default:
 			JOptionPane.showMessageDialog(null,"You need to pick a valid algo. Wise up");
 		 	
-		 
-		 
-		 }
+		 }//end switch
 		 
 		 //Print the results to the user
 		 //Calc the avg waiting time
+	
+		 FCFS(processQueue);
+		
+	}//end main
+	
+	 public void FCFS(ArrayList<Process> processes){
+		
+		Collections.sort(processes);
+		
+		for (Process str : processes){
+			
+			System.out.println();// get the time 
+		}
 		
 	}
 	

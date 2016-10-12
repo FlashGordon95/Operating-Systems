@@ -12,5 +12,7 @@ public class FCFS {
 	//The first process received is the first to enter CPU
 	//No other processes enter the CPU until this job is done
 	
+	
+	
 
 }

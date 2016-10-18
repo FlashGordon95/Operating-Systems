@@ -14,91 +14,62 @@ public class Runner {
 	 
 	 
 	
-	public static void main(String args[]){
-		//Prompt for input 
-		 int numOfProcesses;
-		 ArrayList<Process> processQueue = new ArrayList<Process>();
+	public static void main(String[] args) 
+	{
+		Scanner console = new Scanner(System.in);
 		
-		Scanner in = new Scanner(System.in);
+		List<Process> processArray = new ArrayList<>();
+		int totalProcesses;
+		int option;
+		int quantum;
+				
+		//Gather total amount of processes
+		System.out.println("Enter the total number of processes: ");
+		totalProcesses = console.nextInt();
 		
+		//Get the burst times for each process
+		System.out.println("\nEnter the burst times for each process: ");
+		//for loop which prompts for a burst time
+		//we then add the process into the arrayList and move to next iteration
+		for(int i = 1; i <= totalProcesses; i++)
+		{
+			processArray.add(new Process(i, console.nextInt()));
+		}
 		
-		//numOfProcesses = Integer.parseInt(JOptionPane.showInputDialog("Enter how many processes you want to schedule"));
-		System.out.println("Enter how many processes you want to schedule");
-		numOfProcesses = in.nextInt();
+		//Print the choices and prompt the user to enter an option
+		System.out.println("\n1: FCFS - First Come First Serve \n2: SJF - Shortest Job First \n3: Round Robin \n4: Exit");
+		System.out.println("Please choose a scheduling algorithm: ");
+		option = console.nextInt();
 		
+		while(option != 4)
+		{
+			switch(option)
+			{
+				case 1:
+					//will call the fcfs method which takes in the processes and also the number of the processes
+					//fcfs will attempt to complete each job in its order
+					System.out.print("running algo 1");
+					//fcfs(processArray, totalProcesses);
+					break;
+				case 2:
+					//Collections.sort allows us to reorder the process array by a parameter
+					//In this case it is ordered by the burst time
+					//This uses the compareTo() method in the PiD class which has been overridden
+					Collections.sort(processArray);
+					
+					//to be added : after sorting the array we can simply reuse FCFS
+					break;
+				case 3:
+					//this will hold the round robin algo
+				default:
+					break;
+			}
+			
+			System.out.println("Please choose a scheduling algorithm: ");
+			option = console.nextInt();
+		}
+		
+	} //end main()
+	
 
-		//Take the num and prompt for which algo
-		int[] processArray = new int[numOfProcesses];
-		
-		for (int i = 0; i < processArray.length; i++){
-			//enter name for process
-			//enter burst time for process
-			
-			System.out.println("Enter something : ");
-			String s = in.next();
-			in.nextLine();
-			
-			System.out.print("Enter burst time : ");
-			int b = in.nextInt();
-			
-			
-			Process process = new Process(s, b);
-			
-			processQueue.add(process);
-			
-			
-			//create a new process object
-			//push object in ArrayList
-			
-		}
-		
-		
-		/*
-		int prefferedAlgo = Integer.parseInt(JOptionPane.showInputDialog("Which also do you want to use? \n 1. FCFS \n 2. SJF \n 3. Round Robin (Quantum needed)"));
-		 
-		switch(prefferedAlgo){
-		 case 1: 
-			 //run the FCFS algo
-			 
-			 break;
-		 case 2 : 
-			 //run the sjw algo
-			 
-			 break;
-			 
-		 case 3: 
-			 //run the round robin algo
-			 //need to prompt user for the quantum (do this in the RR class)
-			 
-			 break;
-			 
-		default:
-			JOptionPane.showMessageDialog(null,"You need to pick a valid algo. Wise up");
-		 	
-		 }//end switch
-		 */
-		 //Print the results to the user
-		 //Calc the avg waiting time
-		
-		for (Process process : processQueue){
-			
-			System.out.println(process.getProcessID());// get the time 
-		}
-	
-		 FCFS(processQueue);
-		
-	}//end main
-	
-	 public static void FCFS(ArrayList<Process> processQueue){
-		
-		Collections.sort(processQueue);
-		
-		for (Process process : processQueue){
-			
-			System.out.println(process.getProcessID());// get the time 
-		}
-		
-	}
-	
-	
 }

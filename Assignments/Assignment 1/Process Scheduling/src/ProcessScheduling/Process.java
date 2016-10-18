@@ -9,8 +9,9 @@ package ProcessScheduling;
  */
 public class Process implements Comparable<Process> {
 	//needed for process creations
-	private String processName;
+	private int burst;
 	private int pid;
+	
 	
 	//More so used for the algos
 	private int startTime;	//The start time is when the process enters the CPU
@@ -19,16 +20,16 @@ public class Process implements Comparable<Process> {
 	
 	
 	//Standard constructor for Process
-	public Process(String processName, int pid) {
+	public Process(int pid, int burst) {
         this.pid = pid;
-        this.processName = processName;
+        this.burst = burst;
         
        
     }
 	public int getProcessID(){
-		
-		return this.pid;
+		return pid;
 	}
+	
 	@Override
     public int compareTo(Process compareProcess) {
         int compareID=((Process)compareProcess).getProcessID();
@@ -41,7 +42,7 @@ public class Process implements Comparable<Process> {
 
     @Override
     public String toString() {
-        return "[ Process name=" + this.processName + ", PID=" + this.pid + "]";
+        return "[ Process name=" + this.pid + ", Burst=" + this.burst + "]";
     }
 
 }

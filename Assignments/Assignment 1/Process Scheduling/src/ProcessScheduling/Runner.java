@@ -11,16 +11,13 @@ import javax.swing.JOptionPane;
 public class Runner {
 	
 	 
-	 
-	 
-	
 	public static void main(String[] args) 
 	{
 		Scanner console = new Scanner(System.in);
 		
 		List<Process> processArray = new ArrayList<>();
 		int totalProcesses;
-		int option;
+		int userOption;
 		int quantum;
 				
 		//Gather total amount of processes
@@ -39,17 +36,17 @@ public class Runner {
 		//Print the choices and prompt the user to enter an option
 		System.out.println("\n1: FCFS - First Come First Serve \n2: SJF - Shortest Job First \n3: Round Robin \n4: Exit");
 		System.out.println("Please choose a scheduling algorithm: ");
-		option = console.nextInt();
+		userOption = console.nextInt();
 		
-		while(option != 4)
+		while(userOption != 4)
 		{
-			switch(option)
+			switch(userOption)
 			{
 				case 1:
 					//will call the fcfs method which takes in the processes and also the number of the processes
 					//fcfs will attempt to complete each job in its order
-					System.out.print("running algo 1");
-					//fcfs(processArray, totalProcesses);
+					
+					fcfs(processArray, totalProcesses);
 					break;
 				case 2:
 					//Collections.sort allows us to reorder the process array by a parameter
@@ -66,10 +63,51 @@ public class Runner {
 			}
 			
 			System.out.println("Please choose a scheduling algorithm: ");
-			option = console.nextInt();
+			userOption = console.nextInt();
 		}
 		
 	} //end main()
+	
+	public static void fcfs (List<Process> processArray, int totalProcesses)
+	{
+		int totalWaitTime = 0;
+		float averageWaitTime;
+		
+		System.out.println("Process No | Burst Time | Wait Time");
+		
+		//Instantiate an array size of total number of processes
+		int[] waitingTime = new int[totalProcesses];
+		//Initialize a counter variable to 0
+		int count = 0;
+		
+		//Loop through the ArrayList and add up the wait time
+		for(Process process : processArray)
+		{
+			//print the process information
+			System.out.printf("%10d %10d %10d\n", process.getProcessID(), process.getBurstTime(), waitingTime[count]);
+			
+			//increment the counter to calculate the wait time for the process
+			//the wait time on the first process will always be 0
+			count++;
+			//if the counter is less than the number of processes then add to the wait time
+			if(count < totalProcesses)
+			{
+				//The wait time = the previous wait time + the current burst time
+				waitingTime[count] = waitingTime[count - 1] + process.getBurstTime();
+			}
+			
+		} //end for
+		
+		//Add up the total waiting time for each process
+		for(int i = 0; i < totalProcesses; i++)
+		{
+			totalWaitTime += waitingTime[i];
+		}
+		System.out.println("\nThe total wait time = " + totalWaitTime);
+		
+		averageWaitTime = (float)totalWaitTime / totalProcesses;
+		System.out.println("\nThe average wait time = " + averageWaitTime);
+	} //end fcfs()
 	
 
 }

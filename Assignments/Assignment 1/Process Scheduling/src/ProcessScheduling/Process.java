@@ -27,8 +27,18 @@ public class Process implements Comparable<Process> {
        
     }
 	public int getProcessID(){
-		return pid;
+		
+		return this.pid;
 	}
+	public int getBurstTime() 
+	{
+		return burst;
+	}
+	public void setBurstTime(int burst) 
+	{
+		this.burst = burst;
+	}
+
 	
 	@Override
     public int compareTo(Process compareProcess) {

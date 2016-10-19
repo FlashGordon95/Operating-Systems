@@ -18,28 +18,31 @@ public class Runner {
 		List<Process> processArray = new ArrayList<>();
 		int totalProcesses;
 		int userOption;
-		int quantum;
 				
 		//Gather total amount of processes
 		System.out.println("Enter the total number of processes: ");
 		totalProcesses = console.nextInt();
 		
-		//Get the burst times for each process
-		System.out.println("\nEnter the burst times for each process: ");
+		
+		
 		//for loop which prompts for a burst time
 		//we then add the process into the arrayList and move to next iteration
 		for(int i = 1; i <= totalProcesses; i++)
 		{
+			//Get the burst times for each process
+			System.out.println("\nEnter the burst times for process "+i+": ");
 			processArray.add(new Process(i, console.nextInt()));
 		}
+		//will run code inside at least once and then evaluate the while condition
+		do
+		{
 		
 		//Print the choices and prompt the user to enter an option
 		System.out.println("\n1: FCFS - First Come First Serve \n2: SJF - Shortest Job First \n3: Round Robin \n4: Exit");
 		System.out.println("Please choose a scheduling algorithm: ");
 		userOption = console.nextInt();
 		
-		while(userOption != 4)
-		{
+		
 			switch(userOption)
 			{
 				case 1:
@@ -58,13 +61,17 @@ public class Runner {
 					break;
 				case 3:
 					//this will hold the round robin algo
+					roundRobin(processArray, totalProcesses);
 				default:
 					break;
 			}
-			
-			System.out.println("Please choose a scheduling algorithm: ");
-			userOption = console.nextInt();
-		}
+			//Upon completion of the chosen algo, we notify user
+			//Key prompt is asked here to prevent the loop for repeating endlessly
+			System.out.println("Scheduling processes has completed");
+			System.out.println("Press any key to continue...");
+			console.next();
+
+		}while(userOption != 4);
 		
 	} //end main()
 	
@@ -84,7 +91,7 @@ public class Runner {
 		for(Process process : processArray)
 		{
 			//print the process information
-			System.out.printf("%10d %10d %10d\n", process.getProcessID(), process.getBurstTime(), waitingTime[count]);
+			System.out.printf("%5d %13d %10d\n", process.getProcessID(), process.getBurstTime(), waitingTime[count]);
 			
 			//increment the counter to calculate the wait time for the process
 			//the wait time on the first process will always be 0
@@ -108,6 +115,13 @@ public class Runner {
 		averageWaitTime = (float)totalWaitTime / totalProcesses;
 		System.out.println("\nThe average wait time = " + averageWaitTime);
 	} //end fcfs()
-	
+	public static void roundRobin(List<Process> processArray, int totalProcesses){
+		Scanner console = new Scanner(System.in);
+		int quantum;
+
+		System.out.println("Please enter a quantum time: ");
+		quantum = console.nextInt();
+	}//end roundRobin()
+
 
 }

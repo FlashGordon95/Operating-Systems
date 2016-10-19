@@ -155,11 +155,33 @@ public class Runner {
 				if(process.getBurstTime() < quantum)
 				{
 					burstTime = process.getBurstTime(); 
+					if(process.getBurstTime()==0){
+						
+					}
+					else if (i==(waitingTime.length-1)){
+						waitingTime[0] = waitingTime[0] + (process.getBurstTime()*(waitingTime.length-1));
+
+					}
+					else{
+						waitingTime[i+1] = waitingTime[i] + (process.getBurstTime()*(waitingTime.length-1));
+
+					}
 					process.setBurstTime(0); //process is finished 
 				}//end if
 				else
 				{
 					burstTime = quantum;
+					if(process.getBurstTime()==0){
+						
+					}
+					else if (i==(waitingTime.length-1)){
+						waitingTime[0] = waitingTime[0] + (quantum*(waitingTime.length-1));
+
+					}
+					else{
+						waitingTime[i+1] = waitingTime[i] + (quantum*(waitingTime.length-1));
+
+					}
 					process.setBurstTime(process.getBurstTime() - quantum);
 				}//end else
 				

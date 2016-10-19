@@ -10,6 +10,7 @@ package ProcessScheduling;
 public class Process implements Comparable<Process> {
 	//needed for process creations
 	private int burst;
+	private int initialBurstTime;
 	private int pid;
 	
 	
@@ -23,12 +24,16 @@ public class Process implements Comparable<Process> {
 	public Process(int pid, int burst) {
         this.pid = pid;
         this.burst = burst;
+        this.initialBurstTime = burst;
         
        
     }
 	public int getProcessID(){
 		
 		return this.pid;
+	}
+	public int getInitialBurstTime(){
+		return this.initialBurstTime;
 	}
 	public int getBurstTime() 
 	{

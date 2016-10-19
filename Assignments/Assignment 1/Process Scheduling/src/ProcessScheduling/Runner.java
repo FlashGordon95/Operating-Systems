@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.BinaryOperator;
 
 import javax.swing.JOptionPane;
 
@@ -56,12 +57,13 @@ public class Runner {
 					//In this case it is ordered by the burst time
 					//This uses the compareTo() method in the PiD class which has been overridden
 					Collections.sort(processArray);
-					
+					fcfs(processArray, totalProcesses);
 					//to be added : after sorting the array we can simply reuse FCFS
 					break;
 				case 3:
 					//this will hold the round robin algo
 					roundRobin(processArray, totalProcesses);
+					break;
 				default:
 					break;
 			}
@@ -91,7 +93,7 @@ public class Runner {
 		for(Process process : processArray)
 		{
 			//print the process information
-			System.out.printf("%5d %13d %10d\n", process.getProcessID(), process.getBurstTime(), waitingTime[count]);
+			System.out.printf("%5d %7d %13d %10d\n", process.getProcessID(), process.getInitialBurstTime(), process.getBurstTime(), waitingTime[count]);
 			
 			//increment the counter to calculate the wait time for the process
 			//the wait time on the first process will always be 0
@@ -116,11 +118,31 @@ public class Runner {
 		System.out.println("\nThe average wait time = " + averageWaitTime);
 	} //end fcfs()
 	public static void roundRobin(List<Process> processArray, int totalProcesses){
+		BinaryOperator<Integer> integerAdder = (i, j) -> i + j; // operator used for the streams below
 		Scanner console = new Scanner(System.in);
-		int quantum;
+		int quantum;	//time each process can have in the cpu in their cycle of the rr
 
 		System.out.println("Please enter a quantum time: ");
 		quantum = console.nextInt();
+		
+		
+		//Java 8 Streams implementation.
+		//Here is make use of Streams and in particular the reduction features
+		//Adapted from https://docs.oracle.com/javase/tutorial/collections/streams/reduction.html
+		// - Ryan Gordon
+		Integer totalBurstReduce =  processArray
+				.stream()
+				.map(Process::getBurstTime)
+				.reduce(0, integerAdder);
+		
+		
+		System.out.println("This is total burst reduce"+totalBurstReduce);
+		
+
+			
+		} //end while
+		
+
 	}//end roundRobin()
 
 

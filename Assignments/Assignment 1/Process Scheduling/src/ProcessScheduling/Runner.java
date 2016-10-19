@@ -136,10 +136,41 @@ public class Runner {
 				.reduce(0, integerAdder);
 		
 		
-		System.out.println("This is total burst reduce"+totalBurstReduce);
+		System.out.println("Total process time of all processes :"+totalBurstReduce);
 		
-
-			
+		System.out.println("Process No | Initial Time | Remaining Time | Start Time | Burst Time | Wait Time");
+		
+		int startTime = 0;
+		int burstTime = 0;
+		int[] waitingTime = new int[totalProcesses];
+		int i = 0;
+		
+		//while totalBurstReduce > 0 loop through the array and attempt to complete processes
+		while(totalBurstReduce > 0)
+		{
+			i = 0;
+			for(Process process : processArray)
+			{
+				
+				if(process.getBurstTime() < quantum)
+				{
+					burstTime = process.getBurstTime(); 
+					process.setBurstTime(0); //process is finished 
+				}//end if
+				else
+				{
+					burstTime = quantum;
+					process.setBurstTime(process.getBurstTime() - quantum);
+				}//end else
+				
+				System.out.printf("%5d %15d %16d %12d %12d %11d\n", process.getProcessID(), process.getInitialBurstTime(), process.getBurstTime(), startTime, burstTime, waitingTime[i]);
+				
+				startTime += burstTime; //add to start time for next variable
+				totalBurstReduce = totalBurstReduce - burstTime; //Reduce totalBurstReduce
+				i++;
+			} //end for
+			//Placeholder text 
+			System.out.println("<==============================================================================>");
 		} //end while
 		
 

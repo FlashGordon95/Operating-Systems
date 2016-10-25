@@ -1,10 +1,8 @@
 package ProcessScheduling;
-/**
- * 
- */
+
 
 /**
- * @author college
+ * @author Ryan Gordon - G00326349
  *
  */
 public class Process implements Comparable<Process> {
@@ -25,22 +23,17 @@ public class Process implements Comparable<Process> {
         this.pid = pid;
         this.burst = burst;
         this.initialBurstTime = burst;
-        
-       
     }
 	public int getProcessID(){
-		
 		return this.pid;
 	}
 	public int getInitialBurstTime(){
 		return this.initialBurstTime;
 	}
-	public int getBurstTime() 
-	{
+	public int getBurstTime(){
 		return burst;
 	}
-	public void setBurstTime(int burst) 
-	{
+	public void setBurstTime(int burst){
 		this.burst = burst;
 	}
 
@@ -52,7 +45,7 @@ public class Process implements Comparable<Process> {
         return this.pid-compareID;
 
         /* For Descending order do like this */
-        //return compareage-this.studentage;
+        //return compareID-this.pid;
     }
 
     @Override
@@ -60,4 +53,4 @@ public class Process implements Comparable<Process> {
         return "[ Process name=" + this.pid + ", Burst=" + this.burst + "]";
     }
 
-}
+}//Process Object

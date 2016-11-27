@@ -160,6 +160,10 @@ public class Runner {
 			i = 0;
 			for(Process process : processArray)
 			{
+				if(process.getBurstTime() ==0)
+				{
+					break;
+				}
 				if(process.getBurstTime() < quantum)
 				{
 					burstTime = process.getBurstTime(); 
